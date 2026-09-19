@@ -66,7 +66,12 @@ class RAGPipeline:
 
         return len(chunks)
 
-    def query_knowledge_base(self, query: str, top_k: int = 3) -> Dict[str, Any]:
+    def query_knowledge_base(
+        self,
+        query: str,
+        top_k: int = 3,
+        generate_answer: bool = True,
+    ) -> Dict[str, Any]:
         """
         Performs vector similarity search against knowledge base and generates answer using context.
         """
@@ -118,7 +123,7 @@ class RAGPipeline:
         Synthesize a detailed response.
         """
 
-        generated_answer = llm_client.generate_text(prompt)
+        generated_answer = llm_client.generate_text(prompt) if generate_answer else ""
 
         return {
             "query": query,

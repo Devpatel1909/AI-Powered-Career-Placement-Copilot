@@ -1,4 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Body
+from starlette.concurrency import run_in_threadpool
 from typing import Optional, List
 from pydantic import BaseModel
 
@@ -75,6 +76,13 @@ class JobExplainRequest(BaseModel):
     job: dict
     match_result: dict
 
+
+def _analyze_resume(resume_text: str, target_role: str):
+    parsed = parse_resume(resume_text)
+    improvement = improve_resume(parsed, target_role)
+    return parsed, improvement
+
+
 # 1. Resume Upload & Text Extraction
 @router.post("/upload-resume")
 async def upload_resume(file: UploadFile = File(...)):
@@ -95,8 +103,11 @@ async def upload_resume(file: UploadFile = File(...)):
 @router.post("/analyze-resume")
 async def analyze_resume_endpoint(req: AnalyzeResumeRequest):
     try:
-        parsed = parse_resume(req.resume_text)
-        improvement = improve_resume(parsed, req.target_role or "Software Engineer")
+        parsed, improvement = await run_in_threadpool(
+            _analyze_resume,
+            req.resume_text,
+            req.target_role or "Software Engineer",
+        )
         return {
             "parsed_resume": parsed,
             "improvement_analysis": improvement
@@ -108,7 +119,7 @@ async def analyze_resume_endpoint(req: AnalyzeResumeRequest):
 @router.post("/compare-jd", response_model=JDMatchResult)
 async def compare_jd_endpoint(req: CompareJDRequest):
     try:
-        return analyze_resume_vs_jd(req.resume_text, req.job_description)
+        return await run_in_threadpool(analyze_resume_vs_jd, req.resume_text, req.job_description)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -116,7 +127,8 @@ async def compare_jd_endpoint(req: CompareJDRequest):
 @router.post("/roadmap", response_model=RoadmapResult)
 async def generate_roadmap_endpoint(req: RoadmapRequest):
     try:
-        return generate_learning_roadmap(
+        return await run_in_threadpool(
+            generate_learning_roadmap,
             missing_skills=req.missing_skills,
             target_role=req.target_role,
             available_hours_per_week=req.available_hours_per_week,
@@ -129,7 +141,8 @@ async def generate_roadmap_endpoint(req: RoadmapRequest):
 @router.post("/generate-questions", response_model=InterviewQuestionsResult)
 async def generate_questions_endpoint(req: InterviewQuestionsRequest):
     try:
-        return generate_interview_questions(
+        return await run_in_threadpool(
+            generate_interview_questions,
             resume_text=req.resume_text,
             job_description=req.job_description,
             target_role=req.target_role
@@ -141,7 +154,12 @@ async def generate_questions_endpoint(req: InterviewQuestionsRequest):
 @router.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(req: ChatRequest):
     try:
-        return handle_career_chat(query=req.query, history=req.history, use_rag=req.use_rag)
+        return await run_in_threadpool(
+            handle_career_chat,
+            query=req.query,
+            history=req.history,
+            use_rag=req.use_rag,
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -149,7 +167,7 @@ async def chat_endpoint(req: ChatRequest):
 @router.post("/agent", response_model=AgentExecutionResult)
 async def agent_endpoint(req: AgentRequest):
     try:
-        return run_agentic_workflow(req)
+        return await run_in_threadpool(run_agentic_workflow, req)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -165,7 +183,7 @@ async def rag_ingest_endpoint(req: RAGUploadRequest):
 @router.post("/rag/query", response_model=RAGQueryResult)
 async def rag_query_endpoint(query: str = Body(..., embed=True)):
     try:
-        res = rag_pipeline.query_knowledge_base(query)
+        res = await run_in_threadpool(rag_pipeline.query_knowledge_base, query)
         return RAGQueryResult(
             query=res["query"],
             retrieved_chunks=res["retrieved_chunks"],
@@ -179,7 +197,8 @@ async def rag_query_endpoint(query: str = Body(..., embed=True)):
 @router.post("/personalized-jobs", response_model=JobRecommendationResult)
 async def personalized_jobs_endpoint(req: PersonalizedJobsRequest):
     try:
-        return recommend_personalized_jobs(
+        return await run_in_threadpool(
+            recommend_personalized_jobs,
             resume_text=req.resume_text,
             target_role=req.target_role,
             skills=req.skills,
@@ -227,6 +246,11 @@ async def jobs_match_endpoint(req: JobMatchRequest):
 @router.post("/jobs/explain", response_model=JobExplanationResult)
 async def jobs_explain_endpoint(req: JobExplainRequest):
     try:
-        return explain_job_match(req.parsed_resume, req.job, req.match_result)
+        return await run_in_threadpool(
+            explain_job_match,
+            req.parsed_resume,
+            req.job,
+            req.match_result,
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

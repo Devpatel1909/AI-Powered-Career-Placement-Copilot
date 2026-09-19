@@ -17,7 +17,7 @@ def handle_career_chat(query: str, history: List[ChatMessage], use_rag: bool = F
     if use_rag:
         try:
             from app.services.rag_pipeline import rag_pipeline
-            rag_res = rag_pipeline.query_knowledge_base(query, top_k=3)
+            rag_res = rag_pipeline.query_knowledge_base(query, top_k=3, generate_answer=False)
             rag_context = "\n---\nRELEVANT RAG KNOWLEDGE CONTEXT:\n" + "\n".join(rag_res["retrieved_chunks"])
             for src, chunk in zip(rag_res["sources"], rag_res["retrieved_chunks"]):
                 citations.append(Citation(source=src, snippet=chunk[:150] + "..."))
