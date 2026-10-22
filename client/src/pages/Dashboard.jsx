@@ -4,56 +4,33 @@ import {
   Target, 
   MapPin, 
   Award, 
-  Zap, 
   ArrowRight,
-  Sparkles,
-  Bot,
   Database,
   Briefcase,
+  Upload,
+  Search,
+  Route,
 } from 'lucide-react';
 import MetricCard from '../components/MetricCard';
 
-export default function Dashboard({ setActiveTab, parsedResume, improvement, jdMatch }) {
+export default function Dashboard({ setActiveTab, parsedResume, improvement, jdMatch, roadmap }) {
+  const resumeReady = Boolean(parsedResume && improvement);
+  const matchReady = Boolean(jdMatch);
   return (
-    <div className="space-y-6">
-      {/* Hero Banner */}
-      <div className="glass-card p-8 rounded-3xl relative overflow-hidden border border-blue-500/20 bg-gradient-to-r from-blue-950/40 via-indigo-950/20 to-purple-950/30">
-        <div className="max-w-2xl space-y-3 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono">
-            <Sparkles className="w-3.5 h-3.5" /> Next-Gen Placement Preparation Platform
-          </div>
-          <h2 className="text-3xl font-extrabold text-white leading-tight">
-            Accelerate your tech placement journey with AI precision.
-          </h2>
-          <p className="text-gray-300 text-sm leading-relaxed">
-            Upload your resume, compare against target JDs, close skill gaps with personalized roadmaps, get AI-matched job recommendations, and leverage autonomous agent tools.
-          </p>
-
-          <div className="pt-2 flex flex-wrap gap-3">
-            <button
-              onClick={() => setActiveTab('resume-analyzer')}
-              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-semibold flex items-center gap-2 shadow-lg shadow-blue-600/30 transition-all"
-            >
-              Upload & Analyze Resume <ArrowRight className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setActiveTab('personalized-jobs')}
-              className="px-5 py-2.5 bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all"
-            >
-              <Briefcase className="w-4 h-4 text-emerald-400" /> Find Jobs
-            </button>
-            <button
-              onClick={() => setActiveTab('agent')}
-              className="px-5 py-2.5 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-300 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all"
-            >
-              <Bot className="w-4 h-4 text-purple-400" /> Launch AI Agent
-            </button>
-          </div>
+    <div className="dashboard-view">
+      <div className="page-intro">
+        <div>
+          <p className="eyebrow">Placement workspace</p>
+          <h2>Make your next move clear.</h2>
+          <p className="intro-copy">Turn your resume into a stronger application, one evidence-backed step at a time.</p>
+        </div>
+        <div className="intro-actions">
+          <button onClick={() => setActiveTab('resume-analyzer')} className="primary-button"><Upload className="w-4 h-4" /> {resumeReady ? 'Update resume' : 'Analyze resume'}</button>
+          <button onClick={() => setActiveTab('personalized-jobs')} className="secondary-button"><Briefcase className="w-4 h-4" /> Browse matches</button>
         </div>
       </div>
 
-      {/* Metrics Row */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="metrics-grid">
         <MetricCard 
           title="Resume Score" 
           value={improvement ? `${improvement.resume_score}/100` : 'Not Tested'} 
@@ -84,60 +61,26 @@ export default function Dashboard({ setActiveTab, parsedResume, improvement, jdM
         />
       </div>
 
-      {/* Grid Features Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div 
-          onClick={() => setActiveTab('resume-analyzer')}
-          className="glass-card p-6 rounded-2xl glass-card-hover cursor-pointer border border-gray-800 space-y-3"
-        >
-          <div className="p-3 w-fit bg-blue-500/10 rounded-xl border border-blue-500/20 text-blue-400">
-            <FileCheck2 className="w-6 h-6" />
-          </div>
-          <h3 className="text-lg font-bold text-gray-100">1. Resume Analysis</h3>
-          <p className="text-xs text-gray-400">
-            PDF parsing, skills categorization, ATS feedback, action verb check, and structured JSON extraction using DeepSeek V4 Flash.
-          </p>
-        </div>
-
-        <div 
-          onClick={() => setActiveTab('jd-matcher')}
-          className="glass-card p-6 rounded-2xl glass-card-hover cursor-pointer border border-gray-800 space-y-3"
-        >
-          <div className="p-3 w-fit bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-emerald-400">
-            <Target className="w-6 h-6" />
-          </div>
-          <h3 className="text-lg font-bold text-gray-100">2. Resume vs JD Matcher</h3>
-          <p className="text-xs text-gray-400">
-            Identify exact skill overlaps, missing keywords, candidate strengths, weaknesses, and priority skill matrix.
-          </p>
-        </div>
-
-        <div 
-          onClick={() => setActiveTab('roadmap')}
-          className="glass-card p-6 rounded-2xl glass-card-hover cursor-pointer border border-gray-800 space-y-3"
-        >
-          <div className="p-3 w-fit bg-purple-500/10 rounded-xl border border-purple-500/20 text-purple-400">
-            <MapPin className="w-6 h-6" />
-          </div>
-          <h3 className="text-lg font-bold text-gray-100">3. Personalized Roadmap</h3>
-          <p className="text-xs text-gray-400">
-            Day-by-day and week-by-week personalized study plan, curated resources, and portfolio project suggestions.
-          </p>
-        </div>
-
-        <div 
-          onClick={() => setActiveTab('personalized-jobs')}
-          className="glass-card p-6 rounded-2xl glass-card-hover cursor-pointer border border-gray-800 space-y-3"
-        >
-          <div className="p-3 w-fit bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-emerald-400">
-            <Briefcase className="w-6 h-6" />
-          </div>
-          <h3 className="text-lg font-bold text-gray-100">4. Personalized Jobs</h3>
-          <p className="text-xs text-gray-400">
-            AI-matched job recommendations powered by DeepSeek LLM, RAG placement context, and your resume profile.
-          </p>
-        </div>
+      <div className="dashboard-grid">
+        <section className="work-panel next-step-panel">
+          <div className="panel-heading"><div><p className="eyebrow">Recommended next</p><h3>{resumeReady ? (matchReady ? 'Close the highest-value gap' : 'Compare yourself to a target role') : 'Start with your resume'}</h3></div><ArrowRight className="panel-arrow" /></div>
+          <p className="panel-copy">{resumeReady ? (matchReady ? 'Your role fit is ready. Build a focused roadmap around the skills employers are asking for.' : 'A parsed resume gives every other module useful context.') : 'Upload a PDF to extract skills, score your evidence and unlock personalized recommendations.'}</p>
+          <button onClick={() => setActiveTab(resumeReady ? (matchReady ? 'roadmap' : 'jd-matcher') : 'resume-analyzer')} className="text-button">{resumeReady ? (matchReady ? 'Open skill roadmap' : 'Compare a role') : 'Upload and analyze'} <ArrowRight className="w-4 h-4" /></button>
+        </section>
+        <section className="work-panel evidence-panel">
+          <div className="panel-heading"><div><p className="eyebrow">Your evidence</p><h3>What is ready to use</h3></div><FileCheck2 className="panel-icon" /></div>
+          <div className="evidence-list"><div><span>Resume profile</span><strong>{resumeReady ? 'Analyzed' : 'Waiting'}</strong></div><div><span>Target role fit</span><strong>{matchReady ? 'Scored' : 'Not started'}</strong></div><div><span>Learning plan</span><strong>{roadmap ? 'Generated' : 'Available next'}</strong></div></div>
+        </section>
       </div>
+
+      <section className="module-strip">
+        <div className="section-heading"><div><p className="eyebrow">The workflow</p><h3>From profile to placement</h3></div><p>Each step adds context to the next.</p></div>
+        <div className="workflow-grid">
+          <button onClick={() => setActiveTab('resume-analyzer')}><span className="workflow-number">01</span><span><strong>Resume analysis</strong><small>Extract signal from your experience</small></span><Upload className="workflow-arrow" /></button>
+          <button onClick={() => setActiveTab('jd-matcher')}><span className="workflow-number">02</span><span><strong>Role fit</strong><small>See what a target job still needs</small></span><Search className="workflow-arrow" /></button>
+          <button onClick={() => setActiveTab('roadmap')}><span className="workflow-number">03</span><span><strong>Skill roadmap</strong><small>Turn gaps into a practical plan</small></span><Route className="workflow-arrow" /></button>
+        </div>
+      </section>
     </div>
   );
 }

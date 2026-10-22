@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Map, Calendar, BookOpen, Rocket, Clock, CheckSquare, Sparkles } from 'lucide-react';
 import { apiService } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { usePersistedState } from '../utils/persistedState';
 
 export default function RoadmapView({ missingSkills, roadmap, setRoadmap }) {
-  const [targetRole, setTargetRole] = useState('Software Engineer');
-  const [hours, setHours] = useState(15);
-  const [weeks, setWeeks] = useState(4);
+  const [targetRole, setTargetRole] = usePersistedState('career_app_roadmap_target_role', 'Software Engineer');
+  const [hours, setHours] = usePersistedState('career_app_roadmap_hours', 15);
+  const [weeks, setWeeks] = usePersistedState('career_app_roadmap_weeks', 4);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 

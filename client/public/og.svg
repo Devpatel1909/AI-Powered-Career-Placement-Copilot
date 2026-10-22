@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f3f0e8"/>
+  <rect x="660" y="0" width="540" height="630" fill="#e8e4d9"/>
+  <g fill="none" stroke="#c9c8bd">
+    <path d="M660 126h540M660 252h540M660 378h540M660 504h540"/>
+    <path d="M768 0v630M876 0v630M984 0v630M1092 0v630"/>
+  </g>
+  <g fill="none" stroke="#10120f" opacity=".35">
+    <circle cx="930" cy="300" r="112"/>
+    <circle cx="930" cy="300" r="180"/>
+  </g>
+  <circle cx="930" cy="300" r="56" fill="#c8ff52" stroke="#10120f" stroke-width="2"/>
+  <path d="M930 300L730 160M930 300l220-135M930 300L735 490" stroke="#10120f" stroke-dasharray="6 10"/>
+  <g fill="#10120f" font-family="Arial, sans-serif">
+    <text x="72" y="110" font-size="22" letter-spacing="5">CAREER COPILOT</text>
+    <text x="72" y="278" font-size="78" font-weight="700">Find the role</text>
+    <text x="72" y="360" font-size="78">your work proves.</text>
+    <text x="72" y="430" font-size="22" fill="#55594f">Evidence-backed career direction.</text>
+    <text x="900" y="307" font-size="16" text-anchor="middle">signal</text>
+  </g>
+  <g fill="#10120f" font-family="Arial, sans-serif" font-size="14">
+    <text x="700" y="150">experience</text>
+    <text x="1090" y="145">intent</text>
+    <text x="700" y="500">market</text>
+  </g>
+</svg>

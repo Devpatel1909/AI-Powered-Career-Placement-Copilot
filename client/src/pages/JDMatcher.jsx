@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { GitCompare, CheckCircle2, XCircle, ShieldAlert, Sparkles, Zap, BookOpen } from 'lucide-react';
 import { apiService } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { usePersistedState } from '../utils/persistedState';
 
 export default function JDMatcher({ parsedResume, jdMatch, setJdMatch }) {
-  const [jobDescription, setJobDescription] = useState(
+  const [jobDescription, setJobDescription] = usePersistedState(
+    'career_app_job_description',
     "Job Title: Senior AI / Software Engineer\n\nRequirements:\n- Strong experience with Python, React.js, FastAPI, Node.js.\n- Hands-on experience with LLMs (DeepSeek / OpenAI), Prompt Engineering, and RAG pipelines.\n- Experience with Vector Databases (ChromaDB / Pinecone) and Agentic Frameworks (LangChain / LangGraph).\n- Microservices architecture, Docker, MongoDB."
   );
-  const [resumeText, setResumeText] = useState(
+  const [resumeText, setResumeText] = usePersistedState(
+    'career_app_resume_text',
     parsedResume ? JSON.stringify(parsedResume, null, 2) : "Upload resume in Module 1 or paste text here."
   );
   const [loading, setLoading] = useState(false);

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Upload, FileText, CheckCircle, AlertTriangle, Sparkles, Award, Code, Database, Briefcase } from 'lucide-react';
 import { apiService } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { usePersistedState } from '../utils/persistedState';
 
 export default function ResumeAnalyzer({ parsedResume, setParsedResume, improvement, setImprovement }) {
   const [file, setFile] = useState(null);
-  const [targetRole, setTargetRole] = useState('Software Engineer');
+  const [targetRole, setTargetRole] = usePersistedState('career_app_resume_target_role', 'Software Engineer');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 

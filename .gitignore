@@ -23,6 +23,10 @@ build/
 *.swp
 *.swo
 
+# Local agent tooling and audit reports
+.agents/
+.jury/
+
 # OS
 .DS_Store
 Thumbs.db

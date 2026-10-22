@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Bot, Play, CheckCircle2, ArrowRight, Sparkles, Terminal, Activity } from 'lucide-react';
 import { apiService } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { usePersistedState } from '../utils/persistedState';
 
 export default function AgentView({ parsedResume, jdMatch }) {
-  const [query, setQuery] = useState("Am I ready for Microsoft? Check my skill gaps, improve my resume, generate interview questions, and build a roadmap.");
-  const [targetRole, setTargetRole] = useState("Senior Software Engineer");
-  const [agentResult, setAgentResult] = useState(null);
+  const [query, setQuery] = usePersistedState('career_app_agent_query', "Am I ready for Microsoft? Check my skill gaps, improve my resume, generate interview questions, and build a roadmap.");
+  const [targetRole, setTargetRole] = usePersistedState('career_app_agent_target_role', 'Senior Software Engineer');
+  const [agentResult, setAgentResult] = usePersistedState('career_app_agent_result', null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 

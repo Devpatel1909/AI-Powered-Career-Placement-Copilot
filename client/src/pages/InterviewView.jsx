@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { HelpCircle, Code, UserCheck, Briefcase, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 import { apiService } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { usePersistedState } from '../utils/persistedState';
 
 export default function InterviewView({ parsedResume, jdMatch }) {
-  const [targetRole, setTargetRole] = useState('Software Engineer');
-  const [questions, setQuestions] = useState(null);
+  const [targetRole, setTargetRole] = usePersistedState('career_app_interview_target_role', 'Software Engineer');
+  const [questions, setQuestions] = usePersistedState('career_app_questions', null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [expandedIndex, setExpandedIndex] = useState(null);

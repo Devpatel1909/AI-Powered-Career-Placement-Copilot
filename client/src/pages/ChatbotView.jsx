@@ -1,16 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Send, Bot, User, Database, Sparkles, BookOpen } from 'lucide-react';
 import { apiService } from '../services/api';
+import { usePersistedState } from '../utils/persistedState';
 
 export default function ChatbotView() {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = usePersistedState('career_app_chat_messages', [
     {
       role: 'assistant',
       content: 'Hello! I am your AI Placement & Career Copilot. Ask me anything about resume tips, placement interview prep, learning paths, or technical questions!'
     }
   ]);
   const [input, setInput] = useState('');
-  const [useRag, setUseRag] = useState(false);
+  const [useRag, setUseRag] = usePersistedState('career_app_chat_use_rag', false);
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
 
