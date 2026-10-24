@@ -75,15 +75,15 @@ Instead of relying on LLM parametric memory (which can hallucinate), RAG retriev
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-100 flex items-center gap-2">
+        <h2 className="flex items-center gap-2 text-2xl font-bold text-white-100">
           <BookOpen className="w-6 h-6 text-purple-400" /> Module 12: Senior AI Engineer Interview Preparation Guide
         </h2>
-        <p className="text-xs text-gray-400 mt-1">
+        <p className="mt-1 text-xs text-white-400">
           Deep architectural explanations, prompt engineering principles, design tradeoffs, and interview Q&A.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
         {/* Navigation Sidebar */}
         <div className="space-y-2">
           {topics.map((t) => {
@@ -96,7 +96,7 @@ Instead of relying on LLM parametric memory (which can hallucinate), RAG retriev
                 className={`w-full text-left p-3 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-all ${
                   isActive
                     ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40 shadow-lg shadow-purple-600/10'
-                    : 'bg-gray-900/60 text-gray-400 hover:text-gray-200 border border-gray-800'
+                    : 'bg-gray-900/60 text-white-400 hover:text-white-200 border border-gray-800'
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
@@ -107,12 +107,12 @@ Instead of relying on LLM parametric memory (which can hallucinate), RAG retriev
         </div>
 
         {/* Content Viewer */}
-        <div className="md:col-span-3 glass-card p-6 rounded-2xl border border-gray-800 space-y-4">
-          <h3 className="text-lg font-bold text-gray-100 border-b border-gray-800 pb-3 flex items-center gap-2">
+        <div className="p-6 space-y-4 border border-gray-800 md:col-span-3 glass-card rounded-2xl">
+          <h3 className="flex items-center gap-2 pb-3 text-lg font-bold border-b border-gray-800 text-white-100">
             <Terminal className="w-5 h-5 text-purple-400" /> {currentTopic.title}
           </h3>
 
-          <div className="prose prose-invert max-w-none text-xs text-gray-300 leading-relaxed whitespace-pre-wrap">
+          <div className="text-xs leading-relaxed prose whitespace-pre-wrap text-white-300 prose-invert max-w-none">
             {currentTopic.content}
           </div>
         </div>

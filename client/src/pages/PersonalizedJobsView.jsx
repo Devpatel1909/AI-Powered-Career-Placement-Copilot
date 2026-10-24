@@ -174,28 +174,28 @@ export default function PersonalizedJobsView({
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-gray-100 flex items-center gap-2">
+          <h2 className="flex items-center gap-2 text-2xl font-bold text-white-400">
             <Briefcase className="w-6 h-6 text-blue-400" /> Job Recommendations
           </h2>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="mt-1 text-xs text-white-400">
             Real jobs from public boards, matched to your resume with deterministic scoring.
           </p>
         </div>
-        <div className="flex items-center gap-3 text-xs text-gray-400">
+        <div className="flex items-center gap-3 text-xs text-white-400">
           {lastUpdated && (
             <span className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5" /> Last updated: {timeAgo(lastUpdated)}
             </span>
           )}
           {stats && (
-            <span className="px-2 py-1 rounded bg-gray-800 border border-gray-700">
+            <span className="px-2 py-1 roundabg-gray-200 bordery-gray-700 borgreder bg-">
               {stats.total} jobs · {stats.internships} internships
             </span>
           )}
           <button
             onClick={handleRefreshJobs}
             disabled={refreshing}
-            className="px-3 py-1.5 rounded-lg bg-gray-800 border border-gray-700 hover:border-blue-500 text-gray-300 flex items-center gap-1.5 disabled:opacity-50"
+            className="px-3 py-1.5 rounded-lg bg-gray-200 border border-gray-700 hover:border-blue-500 text-white-400 flex items-center gap-1.5 disabled:opacity-50"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
             Sync
@@ -204,31 +204,31 @@ export default function PersonalizedJobsView({
       </div>
 
       {/* Filters */}
-      <div className="glass-card p-5 rounded-2xl border border-gray-800 space-y-4">
-        <div className="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+      <div className="p-5 space-y-4 border border-gray-800 glass-card rounded-2xl">
+        <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercasetext-white-400 text-blue">
           <Filter className="w-4 h-4" /> Search & Filters
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-3 text-gray-500" />
+            <Search className="absolute w-4 h-4 text-white-400 left-3 top-3" />
             <input
               placeholder="Search title, company, skills..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleFindJobs()}
-              className="w-full pl-9 p-2.5 bg-gray-900 border border-gray-700 rounded-xl text-sm text-gray-200 focus:outline-none focus:border-blue-500"
+              className="w-full pl-9 p-2.5 bg-gray-200 border border-gray-700 rounded-xl text-sm text-white-400 focus:outline-none focus:border-blue-500"
             />
           </div>
           <input
             placeholder="Location (e.g. India, Remote)"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl text-sm text-gray-200 focus:outline-none focus:border-blue-500"
+            className="p-2.5 bg-gray-200 border border-gray-700 rounded-xl text-sm text-white-400 focus:outline-none focus:border-blue-500"
           />
           <select
             value={employmentType}
             onChange={(e) => setEmploymentType(e.target.value)}
-            className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl text-sm text-gray-200 focus:outline-none focus:border-blue-500"
+            className="p-2.5 bg-gray-200 border border-gray-700 rounded-xl text-sm text-white-400 focus:outline-none focus:border-blue-500"
           >
             <option value="">All Job Types</option>
             <option value="Internship">Internship</option>
@@ -239,12 +239,12 @@ export default function PersonalizedJobsView({
             placeholder="Target role"
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl text-sm text-gray-200 focus:outline-none focus:border-blue-500"
+            className="p-2.5 bg-gray-200 border border-gray-700 rounded-xl text-sm text-white-400 focus:outline-none focus:border-blue-500"
           />
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl text-sm text-gray-200 focus:outline-none focus:border-blue-500"
+            className="p-2.5 bg-gray-200 border border-gray-700 rounded-xl text-sm text-white-400 focus:outline-none focus:border-blue-500"
           >
             <option value="match_score">Sort: Match Score</option>
             <option value="latest">Sort: Latest</option>
@@ -253,11 +253,11 @@ export default function PersonalizedJobsView({
         </div>
 
         {/* Find Jobs button */}
-        <div className="flex flex-wrap gap-3 items-center">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={handleFindJobs}
             disabled={loading}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white rounded-xl text-sm font-bold flex items-center gap-2 shadow-lg shadow-blue-600/30 transition-all"
+            className="flex items-center gap-2 px-6 py-3 text-sm font-bold text-white transition-all bg-blue-600 shadow-lg hover:bg-blue-500 disabled:opacity-50 rounded-xl shadow-blue-600/30"
           >
             <Search className="w-4 h-4" />
             {loading ? 'Searching...' : 'Find Jobs'}
@@ -265,12 +265,12 @@ export default function PersonalizedJobsView({
           <button
             onClick={handleRefreshJobs}
             disabled={refreshing}
-            className="px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 disabled:opacity-50 text-gray-200 rounded-xl text-sm font-semibold flex items-center gap-2"
+            className="flex items-center gap-2 px-4 py-3 text-sm font-semibold border border-gray-700 bg-gray-200xt-white-40000 text-blue hover:bg-gray-200 disabled:opacity-50 rounded-xl"
           >
             <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
             {refreshing ? 'Fetching from Greenhouse...' : 'Sync New Jobs'}
           </button>
-          <span className="text-xs text-gray-500">Sync runs once · Find Jobs searches stored jobs (fast)</span>
+          <span className="text-xs text-white-400">Sync runs once · Find Jobs searches stored jobs (fast)</span>
         </div>
 
         <div className="flex flex-wrap gap-2 text-xs">
@@ -278,7 +278,7 @@ export default function PersonalizedJobsView({
             {parsedResume ? '✓ Resume loaded — personalized matching active' : '⚠ Upload resume in Module 1 for personalized scores'}
           </span>
           {employmentType === 'Internship' && (
-            <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300">
+            <span className="px-3 py-1 text-purple-300 border rounded-full bg-purple-500/10 border-purple-500/30">
               Showing internships only
             </span>
           )}
@@ -286,7 +286,7 @@ export default function PersonalizedJobsView({
       </div>
 
       {error && (
-        <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-300 text-xs flex items-center gap-2">
+        <div className="flex items-center gap-2 p-3 text-xs border bg-rose-500/10 border-rose-500/30 rounded-xl text-rose-300">
           <AlertCircle className="w-4 h-4 shrink-0" /> {error}
         </div>
       )}
@@ -295,17 +295,17 @@ export default function PersonalizedJobsView({
 
       {/* Recommended For You */}
       {!loading && hasSearched && parsedResume && recommendedForYou.length > 0 && (
-        <div className="glass-card p-5 rounded-2xl border border-blue-500/20 bg-blue-950/20 space-y-3">
-          <h3 className="text-sm font-bold text-blue-300 flex items-center gap-2">
+        <div className="p-5 space-y-3 border glass-card rounded-2xl border-blue-500/20 bg-blue-950/20">
+          <h3 className="flex items-center gap-2 text-sm font-bold text-blue-300">
             <Sparkles className="w-4 h-4" /> Recommended For You
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
             {recommendedForYou.map((job) => (
-              <div key={job.id} className="flex items-center justify-between p-3 bg-gray-900/60 rounded-xl border border-gray-800 text-sm">
+              <div key={job.id} className="flex items-center justify-between p-3 text-sm border border-gray-800 bg-gray-200/60 rounded-xl">
                 <div>
                   <span className="font-bold text-emerald-400">{job.match?.score}%</span>
-                  <span className="text-gray-300 ml-2">{job.title}</span>
-                  <p className="text-xs text-gray-500">{job.company}</p>
+                  <span className="ml-2 text-white-400">{job.title}</span>
+                  <p className="text-xs text-white-400">{job.company}</p>
                 </div>
               </div>
             ))}
@@ -315,30 +315,30 @@ export default function PersonalizedJobsView({
 
       {/* Job list */}
       {!loading && !hasSearched && (
-        <div className="glass-card p-10 rounded-2xl border border-gray-800 text-center space-y-4">
-          <Briefcase className="w-10 h-10 text-gray-600 mx-auto" />
-          <p className="text-gray-400 text-sm">
+        <div className="p-10 space-y-4 text-center border border-gray-800 glass-card rounded-2xl">
+          <Briefcase className="w-10 h-10 mx-auto text-white-400" />
+          <p className="text-sm text-white-400">
             Set your filters above, then click <strong className="text-blue-400">Find Jobs</strong> to search.
           </p>
-          <p className="text-gray-500 text-xs">
+          <p className="text-xs text-white-400">
             First time? Click <strong>Sync New Jobs</strong> once to load jobs from Greenhouse (takes ~30-60 sec).
           </p>
         </div>
       )}
 
       {!loading && hasSearched && jobs.length === 0 && (
-        <div className="glass-card p-10 rounded-2xl border border-gray-800 text-center space-y-3">
-          <Briefcase className="w-10 h-10 text-gray-600 mx-auto" />
-          <p className="text-gray-400 text-sm">No jobs found for your filters. Try <strong>Sync New Jobs</strong> or change filters.</p>
+        <div className="p-10 space-y-3 text-center border border-gray-800 glass-card rounded-2xl">
+          <Briefcase className="w-10 h-10 mx-auto text-white-400" />
+          <p className="text-sm text-white-400">No jobs found for your filters. Try <strong>Sync New Jobs</strong> or change filters.</p>
         </div>
       )}
 
       {!loading && hasSearched && jobs.map((job) => (
-        <div key={job.id} className="glass-card p-5 rounded-2xl border border-gray-800 space-y-4">
+        <div key={job.id} className="p-5 space-y-4 border border-gray-800 glass-card rounded-2xl">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h4 className="text-lg font-bold text-gray-100">{job.title}</h4>
-              <div className="flex flex-wrap items-center gap-3 mt-1 text-xs text-gray-400">
+              <h4 className="text-lg font-bold text-white-400">{job.title}</h4>
+              <div className="flex flex-wrap items-center gap-3 mt-1 text-xs text-white-400">
                 <span className="flex items-center gap-1"><Building2 className="w-3.5 h-3.5" /> {job.company}</span>
                 <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> {job.location}</span>
                 <span className="px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/30">
@@ -350,8 +350,8 @@ export default function PersonalizedJobsView({
           </div>
 
           {parsedResume && job.match && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-              <div className="p-3 bg-gray-900/60 rounded-xl border border-gray-800">
+            <div className="grid grid-cols-1 gap-3 text-xs md:grid-cols-2">
+              <div className="p-3 border border-gray-800 bg-gray-200/60 rounded-xl">
                 <p className="font-semibold text-emerald-400 mb-1.5 flex items-center gap-1">
                   <CheckCircle2 className="w-3.5 h-3.5" /> Matching Skills
                 </p>
@@ -359,10 +359,10 @@ export default function PersonalizedJobsView({
                   {(job.match.matching_skills || []).map((s) => (
                     <span key={s} className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300">✓ {s}</span>
                   ))}
-                  {(job.match.matching_skills || []).length === 0 && <span className="text-gray-500">None detected</span>}
+                  {(job.match.matching_skills || []).length === 0 && <span className="text-white-400">None detected</span>}
                 </div>
               </div>
-              <div className="p-3 bg-gray-900/60 rounded-xl border border-gray-800">
+              <div className="p-3 border border-gray-800 bg-gray-200/60 rounded-xl">
                 <p className="font-semibold text-rose-400 mb-1.5 flex items-center gap-1">
                   <AlertCircle className="w-3.5 h-3.5" /> Missing Skills
                 </p>
@@ -370,15 +370,15 @@ export default function PersonalizedJobsView({
                   {(job.match.missing_skills || []).map((s) => (
                     <span key={s} className="px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-300">⚠ {s}</span>
                   ))}
-                  {(job.match.missing_skills || []).length === 0 && <span className="text-gray-500">None</span>}
+                  {(job.match.missing_skills || []).length === 0 && <span className="text-white-400">None</span>}
                 </div>
               </div>
             </div>
           )}
 
           {parsedResume && job.match && (
-            <p className="text-sm text-gray-400">
-              Recommendation: <span className="text-blue-300 font-semibold">{job.match.recommendation}</span>
+            <p className="text-sm text-white-400">
+              Recommendation: <span className="font-semibold text-blue-300">{job.match.recommendation}</span>
             </p>
           )}
 
@@ -395,7 +395,7 @@ export default function PersonalizedJobsView({
               <>
                 <button
                   onClick={() => handleExplain(job)}
-                  className="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-200 text-xs font-semibold flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-200 border border-gray-700 text-white-400 text-xs font-semibold flex items-center gap-1.5"
                 >
                   <HelpCircle className="w-3.5 h-3.5" /> Why Am I a Match?
                 </button>
@@ -417,15 +417,15 @@ export default function PersonalizedJobsView({
           <button
             disabled={page <= 1}
             onClick={() => handlePageChange(page - 1)}
-            className="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 text-xs disabled:opacity-40"
+            className="px-4 py-2 text-xs rounded-lg bg-gray-200xt-white-40000 text-blue disabled:opacity-40"
           >
             Previous
           </button>
-          <span className="px-4 py-2 text-xs text-gray-400">Page {page} of {Math.ceil(total / 20)}</span>
+          <span className="px-4 py-2 text-xs text-white-400">Page {page} of {Math.ceil(total / 20)}</span>
           <button
             disabled={page >= Math.ceil(total / 20)}
             onClick={() => handlePageChange(page + 1)}
-            className="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 text-xs disabled:opacity-40"
+            className="px-4 py-2 text-xs rounded-lg bg-gray-200xt-white-40000 text-blue disabled:opacity-40"
           >
             Next
           </button>
@@ -434,25 +434,25 @@ export default function PersonalizedJobsView({
 
       {/* Explain Modal */}
       {explainJob && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="glass-card p-6 rounded-2xl border border-gray-700 max-w-lg w-full max-h-[80vh] overflow-y-auto space-y-4">
-            <h3 className="text-lg font-bold text-gray-100">{explainJob.title} — Match Analysis</h3>
+            <h3 className="text-lg font-bold text-white-400">{explainJob.title} — Match Analysis</h3>
             {explaining && <LoadingSpinner message="Generating AI explanation..." />}
             {explanation && !explaining && (
-              <div className="space-y-3 text-sm text-gray-300">
+              <div className="space-y-3 text-sm text-white-400">
                 <p><strong className="text-blue-300">Recommendation:</strong> {explanation.recommendation}</p>
                 <p>{explanation.reason}</p>
                 {explanation.strengths?.length > 0 && (
                   <div>
-                    <p className="font-semibold text-emerald-400 mb-1">Strengths</p>
-                    <ul className="list-disc list-inside text-xs text-gray-400">
+                    <p className="mb-1 font-semibold text-emerald-400">Strengths</p>
+                    <ul className="text-xs list-inside list-disctext-white-400 text-blue">
                       {explanation.strengths.map((s, i) => <li key={i}>{s}</li>)}
                     </ul>
                   </div>
                 )}
                 {explanation.priority_skills?.length > 0 && (
                   <div>
-                    <p className="font-semibold text-amber-400 mb-1">Priority Skills to Learn</p>
+                    <p className="mb-1 font-semibold text-amber-400">Priority Skills to Learn</p>
                     <div className="flex flex-wrap gap-1">
                       {explanation.priority_skills.map((s) => (
                         <span key={s} className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 text-xs">{s}</span>
@@ -462,8 +462,8 @@ export default function PersonalizedJobsView({
                 )}
                 {explanation.preparation_advice?.length > 0 && (
                   <div>
-                    <p className="font-semibold text-purple-400 mb-1">Preparation Advice</p>
-                    <ul className="list-disc list-inside text-xs text-gray-400">
+                    <p className="mb-1 font-semibold text-purple-400">Preparation Advice</p>
+                    <ul className="text-xs list-inside list-disctext-white-400 text-blue">
                       {explanation.preparation_advice.map((s, i) => <li key={i}>{s}</li>)}
                     </ul>
                   </div>
@@ -472,7 +472,7 @@ export default function PersonalizedJobsView({
             )}
             <button
               onClick={() => { setExplainJob(null); setExplanation(null); }}
-              className="w-full py-2 rounded-xl bg-gray-800 text-gray-300 text-sm"
+              className="w-full py-2 text-sm bg-gray-200xt-white-40000 text-blue rounded-xl"
             >
               Close
             </button>

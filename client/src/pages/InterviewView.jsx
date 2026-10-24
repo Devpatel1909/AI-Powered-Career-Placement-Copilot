@@ -37,36 +37,36 @@ export default function InterviewView({ parsedResume, jdMatch }) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-100 flex items-center gap-2">
+        <h2 className="flex items-center gap-2 text-2xl font-bold text-white-100">
           <HelpCircle className="w-6 h-6 text-amber-400" /> Module 5: AI Interview Question Generator
         </h2>
-        <p className="text-xs text-gray-400 mt-1">
+        <p className="mt-1 text-xs text-white-400">
           Generates technical, behavioral, resume-based, project deep-dive, and coding questions with ideal answers.
         </p>
       </div>
 
       {/* Control Banner */}
-      <div className="glass-card p-6 rounded-2xl border border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="flex flex-col items-center justify-between gap-4 p-6 border border-gray-800 glass-card rounded-2xl md:flex-row">
         <div className="flex-1 w-full">
-          <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Target Role</label>
+          <label className="block mb-1 text-xs font-semibold uppercase text-white-400">Target Role</label>
           <input
             type="text"
             value={targetRole}
             onChange={(e) => setTargetRole(e.target.value)}
-            className="w-full px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-xl text-sm text-gray-100 focus:outline-none focus:border-amber-500"
+            className="w-full px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-xl text-sm text-white-100 focus:outline-none focus:border-amber-500"
           />
         </div>
         <button
           onClick={handleGenerate}
           disabled={loading}
-          className="w-full md:w-auto px-6 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-sm font-semibold shadow-lg shadow-amber-600/30 transition-all flex items-center justify-center gap-2"
+          className="flex items-center justify-center w-full gap-2 px-6 py-3 text-sm font-semibold text-white transition-all shadow-lg md:w-auto bg-amber-600 hover:bg-amber-500 rounded-xl shadow-amber-600/30"
         >
           <Sparkles className="w-4 h-4" /> Generate Interview Set
         </button>
       </div>
 
       {error && (
-        <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-300 text-xs">
+        <div className="p-3 text-xs border bg-rose-500/10 border-rose-500/30 rounded-xl text-rose-300">
           {error}
         </div>
       )}
@@ -75,7 +75,7 @@ export default function InterviewView({ parsedResume, jdMatch }) {
 
       {questions && !loading && (
         <div className="space-y-6">
-          <div className="flex items-center justify-between text-xs text-gray-400 font-mono">
+          <div className="flex items-center justify-between font-mono text-xs text-white-400">
             <span>Total Generated Questions: {questions.total_questions}</span>
             <span>Target: {questions.target_role}</span>
           </div>
@@ -97,10 +97,10 @@ export default function InterviewView({ parsedResume, jdMatch }) {
                   const globalIdx = `${catIdx}-${qIdx}`;
                   const isExpanded = expandedIndex === globalIdx;
                   return (
-                    <div key={qIdx} className="glass-card rounded-2xl border border-gray-800 overflow-hidden">
+                    <div key={qIdx} className="overflow-hidden border border-gray-800 glass-card rounded-2xl">
                       <div 
                         onClick={() => toggleExpand(globalIdx)}
-                        className="p-4 bg-gray-900/60 cursor-pointer flex items-center justify-between hover:bg-gray-900/90 transition-all"
+                        className="flex items-center justify-between p-4 transition-all cursor-pointer bg-gray-900/60 hover:bg-gray-900/90"
                       >
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
@@ -110,25 +110,25 @@ export default function InterviewView({ parsedResume, jdMatch }) {
                             }`}>
                               {q.difficulty}
                             </span>
-                            <span className="text-xs text-gray-400 font-mono">{q.category}</span>
+                            <span className="font-mono text-xs text-white-400">{q.category}</span>
                           </div>
-                          <p className="text-sm font-semibold text-gray-200">{q.question}</p>
+                          <p className="text-sm font-semibold text-white-200">{q.question}</p>
                         </div>
 
-                        {isExpanded ? <ChevronUp className="w-5 h-5 text-gray-400" /> : <ChevronDown className="w-5 h-5 text-gray-400" />}
+                        {isExpanded ? <ChevronUp className="w-5 h-5 text-white-400" /> : <ChevronDown className="w-5 h-5 text-white-400" />}
                       </div>
 
                       {isExpanded && (
-                        <div className="p-5 space-y-3 border-t border-gray-800/80 bg-gray-950/60 text-xs">
+                        <div className="p-5 space-y-3 text-xs border-t border-gray-800/80 bg-gray-950/60">
                           {q.context_or_trigger && (
-                            <p className="text-gray-400">
-                              <strong className="text-gray-300">Why asked:</strong> {q.context_or_trigger}
+                            <p className="text-white-400">
+                              <strong className="text-white-300">Why asked:</strong> {q.context_or_trigger}
                             </p>
                           )}
 
                           <div>
-                            <p className="font-semibold text-emerald-400 mb-1">Ideal Answer Highlights:</p>
-                            <ul className="list-disc list-inside space-y-1 text-gray-300">
+                            <p className="mb-1 font-semibold text-emerald-400">Ideal Answer Highlights:</p>
+                            <ul className="space-y-1 list-disc list-inside text-white-300">
                               {q.ideal_answer_points.map((pt, pIdx) => (
                                 <li key={pIdx}>{pt}</li>
                               ))}
@@ -137,8 +137,8 @@ export default function InterviewView({ parsedResume, jdMatch }) {
 
                           {q.follow_up_questions && q.follow_up_questions.length > 0 && (
                             <div>
-                              <p className="font-semibold text-amber-400 mb-1">Follow-up Probing Questions:</p>
-                              <ul className="list-disc list-inside space-y-1 text-gray-400">
+                              <p className="mb-1 font-semibold text-amber-400">Follow-up Probing Questions:</p>
+                              <ul className="space-y-1 list-disc list-inside text-white-400">
                                 {q.follow_up_questions.map((fu, fIdx) => (
                                   <li key={fIdx}>{fu}</li>
                                 ))}

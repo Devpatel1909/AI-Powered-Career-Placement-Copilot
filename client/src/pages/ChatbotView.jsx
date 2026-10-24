@@ -61,10 +61,10 @@ export default function ChatbotView() {
     <div className="space-y-4 h-[calc(100vh-140px)] flex flex-col">
       <div className="flex items-center justify-between shrink-0">
         <div>
-          <h2 className="text-2xl font-bold text-gray-100 flex items-center gap-2">
+          <h2 className="flex items-center gap-2 text-2xl font-bold text-white-400">
             <MessageSquare className="w-6 h-6 text-blue-400" /> Module 6: Conversational AI Career Chatbot
           </h2>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="mt-1 text-xs text-white-400">
             Contextual memory, windowing management, and optional RAG vector citations.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function ChatbotView() {
               type="checkbox" 
               checked={useRag} 
               onChange={(e) => setUseRag(e.target.checked)}
-              className="accent-blue-500 rounded" 
+              className="rounded accent-blue-500" 
             />
             <Database className="w-3.5 h-3.5 text-amber-400" /> Enable ChromaDB RAG Citations
           </label>
@@ -83,11 +83,11 @@ export default function ChatbotView() {
       </div>
 
       {/* Chat Conversation Box */}
-      <div className="glass-card flex-1 p-6 rounded-2xl border border-gray-800 overflow-y-auto space-y-4">
+      <div className="flex-1 p-6 space-y-4 overflow-y-auto border border-gray-800 glass-card rounded-2xl">
         {messages.map((msg, idx) => (
           <div key={idx} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             {msg.role === 'assistant' && (
-              <div className="w-8 h-8 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center shrink-0">
+              <div className="flex items-center justify-center w-8 h-8 border rounded-xl bg-blue-600/20 border-blue-500/30 shrink-0">
                 <Bot className="w-4 h-4 text-blue-400" />
               </div>
             )}
@@ -100,12 +100,12 @@ export default function ChatbotView() {
               <p className="whitespace-pre-wrap">{msg.content}</p>
 
               {msg.citations && msg.citations.length > 0 && (
-                <div className="pt-2 border-t border-gray-800/80 space-y-1">
+                <div className="pt-2 space-y-1 border-t border-gray-800/80">
                   <p className="text-[10px] font-bold text-amber-400 uppercase flex items-center gap-1">
                     <BookOpen className="w-3 h-3" /> Knowledge Base Citations
                   </p>
                   {msg.citations.map((c, cIdx) => (
-                    <div key={cIdx} className="p-2 bg-gray-950/60 rounded border border-gray-800 text-[11px] text-gray-400">
+                    <div key={cIdx} className="p-2 bg-gray-950/60 rounded border border-gray-800 text-[11px] text-white-400">
                       <span className="font-semibold text-gray-300">[{c.source}]:</span> {c.snippet}
                     </div>
                   ))}
@@ -114,14 +114,14 @@ export default function ChatbotView() {
             </div>
 
             {msg.role === 'user' && (
-              <div className="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center shrink-0">
+              <div className="flex items-center justify-center w-8 h-8 border rounded-xl bg-purple-600/20 border-purple-500/30 shrink-0">
                 <User className="w-4 h-4 text-purple-400" />
               </div>
             )}
           </div>
         ))}
         {loading && (
-          <div className="flex gap-3 items-center text-xs text-gray-400 animate-pulse">
+          <div className="flex items-center gap-3 text-xs text-white-400animate-pulse">
             <Bot className="w-4 h-4 text-blue-400" /> DeepSeek is thinking...
           </div>
         )}
@@ -129,18 +129,18 @@ export default function ChatbotView() {
       </div>
 
       {/* Input Form */}
-      <form onSubmit={handleSend} className="shrink-0 flex gap-3">
+      <form onSubmit={handleSend} className="flex gap-3 shrink-0">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask placement questions, e.g. 'How do I explain microservices in an interview?'"
-          className="flex-1 px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-sm text-gray-100 focus:outline-none focus:border-blue-500"
+          className="flex-1 px-4 py-3 text-sm bordeblatext-white-400-gray-700 bg-grblay-900 text- rounded-xl focus:outline-none focus:border-blue-500"
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-semibold shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2"
+          className="flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all bg-blue-600 shadow-lg hover:bg-blue-500 rounded-xl shadow-blue-600/30"
         >
           <Send className="w-4 h-4" /> Send
         </button>

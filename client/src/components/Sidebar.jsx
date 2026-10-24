@@ -19,7 +19,7 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, onClose }) {
     { label: 'Workspace', items: [{ id: 'dashboard', label: 'Overview', icon: LayoutDashboard }, { id: 'personalized-jobs', label: 'Job matches', icon: Briefcase }] },
     { label: 'Build your case', items: [{ id: 'resume-analyzer', label: 'Resume analysis', icon: FileText }, { id: 'jd-matcher', label: 'Role fit', icon: GitCompare }, { id: 'roadmap', label: 'Skill roadmap', icon: Map }] },
     { label: 'Practice', items: [{ id: 'interview-prep', label: 'Interview prep', icon: HelpCircle }, { id: 'chatbot', label: 'Career coach', icon: MessageSquare }] },
-    { label: 'AI workspace', items: [{ id: 'agent', label: 'Agent runner', icon: Bot }, { id: 'rag-hub', label: 'Knowledge hub', icon: Database }, { id: 'prep-guide', label: 'Engineering notes', icon: BookOpen }] },
+    { label: 'AI workspace', items: [{ id: 'agent', label: 'Agent runner', icon: Bot }, { id: 'rag-hub', label: 'Knowledge hub', icon: Database }] },
   ];
 
   return (
