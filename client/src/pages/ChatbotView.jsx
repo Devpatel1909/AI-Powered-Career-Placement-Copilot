@@ -70,7 +70,7 @@ export default function ChatbotView() {
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="flex items-center gap-2 cursor-pointer bg-gray-900/80 px-3 py-1.5 rounded-xl border border-gray-800 text-xs">
+          <label className="flex items-center gap-2 cursor-pointer bg-gray-100/80 px-3 py-1.5 rounded-xl border border-gray-800 text-xs">
             <input 
               type="checkbox" 
               checked={useRag} 
@@ -95,7 +95,7 @@ export default function ChatbotView() {
             <div className={`max-w-2xl p-4 rounded-2xl text-xs space-y-2 leading-relaxed ${
               msg.role === 'user'
                 ? 'bg-blue-600 text-white rounded-br-none shadow-lg shadow-blue-600/20'
-                : 'bg-gray-900/90 text-gray-200 border border-gray-800 rounded-bl-none'
+                : 'bg-gray-100/90 text-gray-200 border border-gray-800 rounded-bl-none'
             }`}>
               <p className="whitespace-pre-wrap">{msg.content}</p>
 
@@ -105,7 +105,7 @@ export default function ChatbotView() {
                     <BookOpen className="w-3 h-3" /> Knowledge Base Citations
                   </p>
                   {msg.citations.map((c, cIdx) => (
-                    <div key={cIdx} className="p-2 bg-gray-950/60 rounded border border-gray-800 text-[11px] text-white-400">
+                    <div key={cIdx} className="p-2 bg-gray-100/60 rounded border border-gray-800 text-[11px] text-white-400">
                       <span className="font-semibold text-gray-300">[{c.source}]:</span> {c.snippet}
                     </div>
                   ))}
